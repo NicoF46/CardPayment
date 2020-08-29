@@ -9,6 +9,7 @@ public abstract class Card {
     protected String CardHolder;
     protected Date ExpirationDate;
     static double MaximumPaymentValue = 1000.0;
+    static double DefaultRateValue = 1.0;
 
     public void ShowCardInformation(){
         System.out.printf(" Card Name: %s, Number: %s , CardHolder: %s, Expiration Date: %s\n" ,
@@ -20,7 +21,7 @@ public abstract class Card {
     }
 
     public boolean ValidCard(){
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");   
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy MM dd");   
         return (sdf.format(this.ExpirationDate).compareTo(sdf.format(new Date())) < 0) ? false: true;
     }
 
@@ -31,6 +32,10 @@ public abstract class Card {
     public boolean EqualstoCard(Card ComparisonCard){
         return (this.Name == ComparisonCard.Name && this.Number == ComparisonCard.Number && this.CardHolder == ComparisonCard.CardHolder
              && this.ExpirationDate == ComparisonCard.ExpirationDate);  
+    }
+
+    public double OperationRateValue(Date date){
+        return DefaultRateValue;
     }
 
 

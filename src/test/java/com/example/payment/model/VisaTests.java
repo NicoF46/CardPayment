@@ -18,16 +18,14 @@ public class VisaTests {
 
     @Test
     void setACardAsValidWithAExpiredFutureDate() throws ParseException {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        Date MyCardExpirationDate = sdf.parse("2021-12-31");
+        Date MyCardExpirationDate = new SimpleDateFormat("yyyy MM dd").parse("2021 12 31");
         Visa MyCard = new Visa("123456","Juan Diaz", MyCardExpirationDate);
         assertTrue(MyCard.ValidCard());
     }
 
     @Test
     void setACardAsExpiredWithAExpiredPassedDate() throws ParseException {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        Date MyCardExpirationDate = sdf.parse("2019-12-31");
+        Date MyCardExpirationDate = new SimpleDateFormat("yyyy MM dd").parse("2020 01 31");
         Visa MyCard = new Visa("123456","Juan Diaz", MyCardExpirationDate);
         assertFalse(MyCard.ValidCard());
     }
@@ -77,5 +75,11 @@ public class VisaTests {
         assertFalse(MyCard1.EqualstoCard(MyCard2));
     }
 
-
+    @Test
+    void CalculateRateCorrectly() throws ParseException {
+        Date date = new SimpleDateFormat("yyyy MM dd").parse("2020 09 10");
+        Visa MyCard = new Visa("123456","Juan Diaz",date);
+        double ExpectedRate = 20.0/9.0;
+        assertEquals(MyCard.OperationRateValue(date),ExpectedRate);
+    }
 }
