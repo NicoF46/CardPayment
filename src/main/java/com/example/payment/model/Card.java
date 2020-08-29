@@ -38,6 +38,17 @@ public abstract class Card {
         return DefaultRateValue;
     }
 
+    public boolean ValidCardNumber(String CardNumber) {
+	    if (CardNumber == null) {
+	        return false;
+	    }
+	    try {
+	        Long.parseLong(CardNumber);
+	    } catch (NumberFormatException nfe) {
+	        return false;
+	    }
+	    return true;
+	}
 
 
 }

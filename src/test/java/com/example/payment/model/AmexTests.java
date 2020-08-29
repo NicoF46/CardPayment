@@ -6,6 +6,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class AmexTests {
@@ -81,5 +82,11 @@ public class AmexTests {
         Amex MyCard = new Amex("123456","Juan Diaz",date);
         double ExpectedRate = 9*0.1;
         assertEquals(MyCard.OperationRateValue(date),ExpectedRate);
+    }
+
+    @Test
+    void CreateCardWithInvalidNumberThrowException() throws ParseException {
+        assertThrows(IllegalArgumentException.class, () -> {new Nara("1234AB56", "Juan Diaz", new Date());
+        });
     }
 }
