@@ -7,7 +7,9 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.example.payment.model.Amex;
 import com.example.payment.model.Card;
+import com.example.payment.model.Nara;
 import com.example.payment.model.Visa;
 
 @SpringBootApplication
@@ -23,6 +25,9 @@ public class DemoApplication {
 		if (ValidCard(MyCard))
 			System.out.printf("Valid");
 		else System.out.printf("No Valid ");
+		double valor = CalculateOperationRate("Nara",100);
+		System.out.printf("Valor %f",valor );
+
 	}
 
 	private static void DisplayCardInformation(Card MyCard){
@@ -44,11 +49,11 @@ public class DemoApplication {
 	private static double CalculateOperationRate(String CardName, double PaymentValue ){
 		switch(CardName) {
 			case "Visa":
-				return 2.0;				
+				return new Visa("123456","Juan Diaz",new Date()).OperationRateValue(new Date())*PaymentValue/100;				
 			case "Amex":
-				return 1.0;
+				return new Amex("123456","Juan Diaz",new Date()).OperationRateValue(new Date())*PaymentValue/100;
 			case "Nara":
-				return 3.0;
+				return new Nara("123456","Juan Diaz",new Date()).OperationRateValue(new Date())*PaymentValue/100;
 			default:
 			  return 0;
 		}
