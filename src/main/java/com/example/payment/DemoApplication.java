@@ -4,8 +4,6 @@ package com.example.payment;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 
 import com.example.payment.model.Amex;
 import com.example.payment.model.Card;
@@ -18,13 +16,16 @@ public class DemoApplication {
 	public static void main(String[] args) {
 		//SpringApplication.run(DemoApplication.class, args);
 		Date MyCardDate = new Date();
-		Visa MyCard = new Visa("123456","Juan Diaz",MyCardDate);
-		DisplayCardInformation(MyCard);
-		Visa MyCard2 = new Visa("123456","Juan Diaz",MyCardDate);
+		Visa MyCard1 = new Visa("123456","Juan Diaz",MyCardDate);
+		DisplayCardInformation(MyCard1);
+		Amex MyCard2 = new Amex("123456","Juan Diaz",MyCardDate);
 		DisplayCardInformation(MyCard2);
-		if (ValidCard(MyCard))
+		Nara MyCard3 = new Nara("123456","Juan Diaz",MyCardDate);
+		DisplayCardInformation(MyCard3);
+		if (ValidCard(MyCard1))
 			System.out.printf("Valid");
-		else System.out.printf("No Valid ");
+		else 
+			System.out.printf("No Valid ");
 		double valor = CalculateOperationRate("Nara",100);
 		System.out.printf("Valor %f",valor );
 

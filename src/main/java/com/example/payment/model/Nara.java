@@ -7,7 +7,7 @@ import java.util.Date;
 public class Nara extends Card {
 
     public Nara( String Number, String CardHolder, Date ExpDate) {
-        this.Name = "Amex";
+        this.Name = "Nara";
         this.Number = Number;
         this.CardHolder = CardHolder;
         this.ExpirationDate = ExpDate;
