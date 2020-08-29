@@ -1,10 +1,7 @@
-package com.example.demo.model;
+package com.example.payment.model;
 
 import org.junit.jupiter.api.Test;
 import java.util.Date;
-
-import com.example.payment.model.Visa;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -63,4 +60,22 @@ public class VisaTests {
         Visa MyCard = new Visa("123456", "Juan Diaz", new Date());
         assertTrue(MyCard.ValidTransaction(PaymentValue));
     }
+
+    @Test
+    void CompareVisaCardWithOtherVisaWithTheSameValues(){
+        Date MyCardDate = new Date();
+		Visa MyCard1 = new Visa("123456","Juan Diaz",MyCardDate);
+        Visa MyCard2 = new Visa("123456","Juan Diaz",MyCardDate);
+        assertTrue(MyCard1.EqualstoCard(MyCard2));
+    }
+
+    @Test
+    void CompareVisaCardWithOtherVisaWithTheDifferentNumber(){
+        Date MyCardDate = new Date();
+		Visa MyCard1 = new Visa("123456","Juan Diaz",MyCardDate);
+        Visa MyCard2 = new Visa("123457","Juan Diaz",MyCardDate);
+        assertFalse(MyCard1.EqualstoCard(MyCard2));
+    }
+
+
 }

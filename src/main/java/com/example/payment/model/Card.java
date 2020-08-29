@@ -11,8 +11,8 @@ public abstract class Card {
     static double MaximumPaymentValue = 1000.0;
 
     public void ShowCardInformation(){
-        System.out.println("Card name");
-        System.out.println(this.Name);
+        System.out.printf(" Card Name: %s, Number: %s , CardHolder: %s, Expiration Date: %s\n" ,
+            this.Name,this.Number,this.CardHolder,this.ExpirationDate.toString());
     }
 
     public String CardName(){
@@ -27,5 +27,12 @@ public abstract class Card {
     public boolean ValidTransaction(double PaymentValue){
         return PaymentValue < MaximumPaymentValue && PaymentValue > 0;
     }
+
+    public boolean EqualstoCard(Card ComparisonCard){
+        return (this.Name == ComparisonCard.Name && this.Number == ComparisonCard.Number && this.CardHolder == ComparisonCard.CardHolder
+             && this.ExpirationDate == ComparisonCard.ExpirationDate);  
+    }
+
+
 
 }
