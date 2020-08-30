@@ -1,6 +1,6 @@
 package com.example.payment;
 
-//import org.springframework.boot.SpringApplication;
+import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.util.Date;
@@ -14,7 +14,6 @@ import com.example.payment.model.Visa;
 public class DemoApplication {
 
 	public static void main(String[] args) {
-		//SpringApplication.run(DemoApplication.class, args);
 		Date MyCardDate = new Date();
 		Visa MyCard1 = new Visa("123456","Juan Diaz",MyCardDate);
 		DisplayCardInformation(MyCard1);
@@ -28,10 +27,10 @@ public class DemoApplication {
 			System.out.printf("No Valid ");
 		double valor = CalculateOperationRate("Nara",100);
 		System.out.printf("Valor %f",valor );
-
-	}
-
-	private static void DisplayCardInformation(Card MyCard){
+		SpringApplication.run(DemoApplication.class, args);
+		}
+		
+		private static void DisplayCardInformation(Card MyCard){
 		MyCard.ShowCardInformation();
 	}
 
@@ -47,7 +46,7 @@ public class DemoApplication {
 		return FirstCard.EqualstoCard(SecondCard);
 	}
 
-	private static double CalculateOperationRate(String CardName, double PaymentValue ){
+	public static double CalculateOperationRate(String CardName, double PaymentValue ){
 		switch(CardName) {
 			case "Visa":
 				return new Visa("123456","Juan Diaz",new Date()).OperationRateValue(new Date())*PaymentValue/100;				
