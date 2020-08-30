@@ -1,5 +1,7 @@
 package com.example.payment.controller;
 
+import java.util.Arrays;
+
 import com.example.payment.DemoApplication;
 
 import org.springframework.http.HttpStatus;
@@ -16,16 +18,23 @@ public class PaymentController {
 
     public ResponseEntity<Object> processOperationRate(@RequestBody TransactionRateProcessModel transactionDetails) {
         new DemoApplication();
-        if (invalid_params(transactionDetails))
-            return ResponseEntity.badRequest().body("Missing parameter");
+        if (missing_params(transactionDetails))
+            return ResponseEntity.badRequest().body("Missing parameters");
+        else if (invalid_params(transactionDetails))
+            return ResponseEntity.unprocessableEntity().body("Invalid parameters");
         double amountRateValue = DemoApplication.CalculateOperationRate(transactionDetails.getCardName(),
         Double.parseDouble(transactionDetails.getAmount()));
         return new ResponseEntity<Object>(new amountRate(Double.toString(amountRateValue)), HttpStatus.OK);
 
     }
-    public boolean invalid_params(TransactionRateProcessModel bodyParams){
+    public boolean missing_params(TransactionRateProcessModel bodyParams){
         return ((bodyParams.getCardName()==null) || (bodyParams.getAmount() == null));
     }
 
-
+    public boolean invalid_params(TransactionRateProcessModel bodyParams){
+        String[] validCards = {"Visa","Amex","Nara"};
+        boolean validCard = Arrays.stream(validCards).anyMatch(bodyParams.getCardName()::equals);
+        boolean validAmount =  Double.parseDouble(bodyParams.getAmount())>0;
+        return !(validCard && validAmount);
+    }
 }
